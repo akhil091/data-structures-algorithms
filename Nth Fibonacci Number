@@ -1,12 +1,10 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-
 int findNthFibonacci(int n) {
         if( n== 1 || n == 2){
                 cout << 1;
         }
-
         int current;
         int prev1 = 1;
         int prev2 = 1;
