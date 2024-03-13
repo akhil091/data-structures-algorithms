@@ -1,0 +1,12 @@
+//1 to N without loop
+vector<int> printNos(int x) {
+    if(x==0){
+        return {};
+    }else{
+        //decrementing value of x
+        vector<int> arr = printNos(x-1);
+        //emplace_back is faster than push_back
+        arr.emplace_back(x);
+        return arr;
+    }
+}
