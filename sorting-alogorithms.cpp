@@ -47,3 +47,26 @@ void insertionSort(int arr[], int n)
         }
     }
 }
+
+//recursive- insertion sort
+void insertionSort(int arr[], int n)
+{
+    // Base case: if array size is 1 or less, it's already sorted
+    if (n <= 1)
+        return;
+
+    // Sort first n-1 elements recursively
+    insertionSort(arr, n - 1);
+
+    // Insert last element at its correct position in sorted array
+    int last = arr[n - 1];
+    int j = n - 2;
+
+    // Move elements greater than last to one position ahead
+    while (j >= 0 && arr[j] > last) {
+        arr[j + 1] = arr[j];
+        j--;
+    }
+
+    // Insert last at its correct position
+   
