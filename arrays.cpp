@@ -90,7 +90,7 @@ int i = 0;
   }
 return i + 1;
 
- //Left Rotate an Array by One-  brute approach
+ /////////////////////////////////Left Rotate an Array by One-  brute approach
 vector<int> rotateArray(vector<int>& arr, int n) {
     //Time Complexity: O(n), as we iterate through the array only once., Space Complexity: O(n) as we are using another array of size, same as the given array.
    vector<int> temp;
@@ -99,6 +99,101 @@ vector<int> rotateArray(vector<int>& arr, int n) {
   }
    temp.push_back(arr[0]);
   return temp;
+}
+
+//optimal approach
+vector<int> rotateArray(vector<int>& arr, int n) {
+
+ int temp = arr[0]; // storing the first element of array in a variable
+  for (int i = 0; i < n - 1; i++) {
+    arr[i] = arr[i + 1];
+  }
+  arr[n - 1] = temp;
+  return arr;
+//Time Complexity: O(n), as we iterate through the array only once.
+//Space Complexity: O(1) as no extra space is used
+}
+
+/////////////////////////Rotate array by K elements from left
+//Time Complexity: O(n), Space Complexity: O(k) since k array element needs to be stored in temp array
+vector<int> rotateArray(vector<int>arr, int k) {
+   int n = arr.size();
+    // Check if array size is zero, no rotation needed
+    if (n == 0)
+        return arr; // No rotation needed, return original vector
+    
+    // Normalize rotation count to avoid unnecessary rotations
+    k = k % n;
+    
+    // If normalized rotation count exceeds array size, no rotation needed
+    if (k == 0)
+        return arr; // No rotation needed, return original vector
+    
+    // Temporary vector to store elements to be rotated
+    std::vector<int> temp(arr.begin(), arr.begin() + k);
+
+    // Shift remaining elements to the left by 'k' positions
+    for (int i = 0; i < n - k; i++)
+    {
+        arr[i] = arr[i + k];
+    }
+
+    // Copy back the rotated elements from the temporary vector to the end of the original vector
+    for (int i = n - k; i < n; i++)
+    {
+        arr[i] = temp[i - n + k];
+    }
+    return arr;
+}
+
+///////////////////////move-all-zeros-to-the-end-of-the-array
+//brute approach: Time Complexity: O(N) + O(X) + O(N-X) ~ O(2*N), where N = total no. of elements, Space Complexity: O(N), 
+vector<int> moveZeros(int n, vector<int> a) {
+   vector<int> temp;
+    //copy non-zero elements
+    //from original -> temp array:
+    for (int i = 0; i < n; i++) {
+        if (a[i] != 0)
+            temp.push_back(a[i]);
+    }
+
+    // number of non-zero elements.
+    int nz = temp.size();
+
+    //copy elements from temp
+    //fill first nz fields of
+    //original array:
+    for (int i = 0; i < nz; i++) {
+        a[i] = temp[i];
+    }
+
+    //fill rest of the cells with 0:
+    for (int i = nz; i < n; i++) {
+        a[i] = 0;
+    }
+    return a;
+}
+
+//optimal approach :Time Complexity: O(N), N = size of the array., SC: O(1)
+vector<int> moveZeros(int n, vector<int> a) {
+   int j = -1;
+   for(int i=0; i<n; i++) {
+       if(a[i] == 0) {
+           j = i;
+           break;
+       }
+   }
+   //no non-zero elements
+   if (j == -1) return a;
+    //Move the pointers i and j
+    //and swap accordingly:
+    for (int i = j + 1; i < n; i++) {
+        if (a[i] != 0) {
+            swap(a[i], a[j]);
+            j++;
+        }
+    }
+    return a;
 }
 
 
