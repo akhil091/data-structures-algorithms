@@ -90,7 +90,16 @@ int i = 0;
   }
 return i + 1;
 
-
+ //Left Rotate an Array by One-  brute approach
+vector<int> rotateArray(vector<int>& arr, int n) {
+    //Time Complexity: O(n), as we iterate through the array only once., Space Complexity: O(n) as we are using another array of size, same as the given array.
+   vector<int> temp;
+  for (int i = 1; i < n; i++) {
+    temp.push_back(arr[i]);
+  }
+   temp.push_back(arr[0]);
+  return temp;
+}
 
 
 
